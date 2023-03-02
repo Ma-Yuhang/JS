@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.利用 RegExp对象来创建正则表达式
+        var rg = new RegExp(/123/);
+        console.log(rg);
+        // 2.利用字面量创建
+        var rg1 = /123/;
+        // 3.test方法判断字符串是否符合正则表达式的规范 符合返回true 不符合返回false
+        console.log(rg1.test(123));
+        console.log(rg1.test('ab'));
+    </script>
+</body>
+</html>

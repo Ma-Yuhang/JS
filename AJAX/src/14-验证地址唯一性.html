@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        p {
+            height: 50px;
+            width: 230px;
+            font-size: 16px;
+            text-align: center;
+            
+            line-height: 50px;
+        }
+        .bg-success {
+            background-color: greenyellow;
+            border: 1px solid #ccc;
+        }
+        .bg-danger {
+            background-color: rgb(243, 57, 57);
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="">邮箱地址</label>
+            <input type="email" class="form-control" placeholder="请输入邮箱地址">
+        </div>
+        <!-- 错误 bg-danger  正确 bg-success -->
+        <p id="info"></p>
+        <!-- 后端还未完善，先这样使用 -->
+        <script src="ajax函数封装.js"></script>
+        <script>
+            let emailInp = document.querySelector('.form-control');
+            let info = document.querySelector('#info');
+            // 绑定失去焦点事件
+            emailInp.onblur = function() {
+                // alert(1);
+                let email = this.value;
+                // 验证qq邮箱
+                let reg = /^[0-9]{6,10}@\w+.com$/g;
+                if(!reg.test(email)) {
+                    info.innerHTML = '请输入正确的邮箱格式';
+                    info.className = 'bg-danger';
+                    return;
+                }
+                ajax({
+                    type: 'get',
+                    url: 'http://localhost:3000/email',
+                    data: {
+                        email: email
+                    },
+                    success: function(result) {
+                        info.innerHTML = result.message;
+                        info.className = 'bg-success';
+                    },
+                    error: function(result) {
+                        info.innerHTML = result.message;
+                        info.className = 'bg-danger';
+                    }
+                });
+                
+            }
+        </script>
+    </div>
+</body>
+</html>

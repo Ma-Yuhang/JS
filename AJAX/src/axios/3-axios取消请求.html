@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn1">提交</button>
+    <button id="btn2">取消请求</button>
+    <script>
+        const btn1 = document.querySelector('#btn1')
+        const btn2 = document.querySelector('#btn2')
+        const { CancelToken } = axios
+        let cancel
+        btn1.onclick = () => {
+            axios({
+                url: 'http://127.0.0.1:8000/delay',
+                cancelToken: new CancelToken((c) => {
+                    cancel = c
+                })
+            }).then(
+                response => {
+                    console.log('成功了', response.data);
+                },
+                error => {
+                    console.log('失败了', error);
+                }
+            )
+        }
+        btn2.onclick = () => {
+            cancel()
+        }
+
+    </script>
+</body>
+
+</html>

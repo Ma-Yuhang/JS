@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // rest 参数 与 spread 扩展运算符 在ES6中已经引入，不过在ES6中只针对与数组
+        // 在ES9中为对象提供了像数组一样的rest参数和扩展运算符
+        function connect({host, port, ...user}) {
+            console.log(host);
+            console.log(port);
+            console.log(user);
+        }
+        connect({
+            host: '127.0.0.1',
+            port: 3306,
+            username: 'root',
+            password: 'root'
+        })
+
+        // const skillOne = {
+        //     q: '天音波',
+        //     w: '金钟罩'
+        // }
+        // console.log({...skillOne});
+
+        const skillOne = {
+            q: '天音波'
+        }
+        const skillTwo = {
+            w: '金钟罩'
+        }
+        const skillThree = {
+            e: '天雷破'
+        }
+        const skillFour = {
+            r: '神龙摆尾'
+        }
+        const mangseng = {...skillOne, ...skillTwo, ...skillThree, ...skillFour};
+        console.log(mangseng);
+    </script>
+</body>
+
+</html>

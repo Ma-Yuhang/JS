@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- wdaffa@sina.com.cn -->
+    <input type="text" id="mail" value="wdaffa@sina.com.cn">
+    <span></span>
+    <script>
+        let mail = document.querySelector('#mail');
+        let reg = /^[\w-]+@([\w-]+\.)+(com|cn|org)$/;
+        // console.log(reg.test(mail.value));
+        mail.addEventListener('keyup', function() {
+            let span = document.querySelector('span');
+            span.innerHTML = reg.test(this.value) ? "正确" : "错误";
+        })
+    </script>
+</body>
+</html>

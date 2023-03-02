@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .tb {
+            width: 1000px;
+            margin: 400px auto;
+        }
+
+        .tab_list {
+            height: 50px;
+            background-color: #ccc;
+        }
+
+        li {
+            float: left;
+            list-style: none;
+            text-align: center;
+            line-height: 50px;
+            padding: 0 30px;
+        }
+
+        .current {
+            background-color: hotpink;
+        }
+
+        .item {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tb">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后保障</li>
+                <li>商品评价</li>
+            </ul>
+        </div>
+        <div class="tab_con">
+            <div class="item" style="display: block;">
+                商品介绍内容
+            </div>
+            <div class="item">
+                规格与包裝内容
+            </div>
+            <div class="item">
+                售后保障内容
+            </div>
+            <div class="item">
+                商品评价内容
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // var tab_list = document.querySelector('.tab_list');
+    // var lis = tab_list.querySelectorAll('li');
+    // var items = document.querySelectorAll('.item');
+    // for (var i = 0; i < lis.length; i++) {
+    //     lis[i].setAttribute('index',i);
+    //     lis[i].onclick = function () {
+    //         // 1.点击底色变红
+    //         for (var i = 0; i < lis.length; i++) {
+    //             lis[i].className = '';
+    //         }
+    //         this.className = 'current';
+    //         // 2.显示下面的内容
+    //         var index = this.getAttribute('index');
+    //         for (var i = 0; i < items.length; i++) {
+    //             items[i].style.display = 'none';
+    //         }
+    //         items[index].style.display = 'block';
+    //     }
+    // }
+
+    var tab_list = document.querySelector('.tab_list');
+    var lis = tab_list.querySelectorAll('li');
+    var items = document.querySelectorAll('.item');
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].setAttribute('index', i);
+        lis[i].onclick = function () {
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = '';
+            }
+            this.className = 'current';
+
+            var index = this.getAttribute('index');
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.display = 'none';
+            }
+            items[index].style.display = 'block';
+        }
+    }
+
+
+
+
+    // tab栏切换
+    var jiayong = document.querySelector('.jiayong');
+    console.log(jiayong);
+    var lis = jiayong.querySelectorAll('li');
+    var tab_list_item = document.querySelectorAll('.tab_list_item');
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].setAttribute('index', i);
+        lis[i].addEventListener('click', function () {
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = '';
+            }
+            this.className = 'red';
+            var index = this.getAttribute('index');
+            for (var i = 0; i < tab_list_item.length; i++) {
+                tab_list_item[i].style.display = 'none';
+            }
+            tab_list_item[index].style.display = 'block';
+        })
+    }
+</script>
+
+</html>

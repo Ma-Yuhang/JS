@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <button>按钮</button>
+        <p>时间</p>
+        <span></span>
+    </div>
+</body>
+<script>
+    var btn = document.querySelector('button');
+    var p = document.querySelector('p');
+    btn.onclick = function() {
+        p.innerText = '2021-12-24';
+    }
+
+    var span = document.querySelector('span');
+    span.innerText = getDate();
+    function getDate() {
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var dates = date.getDate();
+        var day = date.getDay();
+        var arr = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+        return (year + '年' + month + '月' + dates + '日 ' + arr[day]);
+    }
+    
+</script>
+</html>

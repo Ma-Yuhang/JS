@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    手机号：<input type="number">
+    <button>发送验证码</button>
+    手机号：<input type="number">
+    <button>发送验证码</button>
+    手机号：<input type="number">
+    <button>发送验证码</button>
+</body>
+<script>
+    function fn(x, y) {
+        console.log(this);
+        console.log(x + y);
+    }
+    var o = {
+        name: 'andy'
+    }
+    var f = fn.bind(o, 1, 2);
+    f();
+    // 1.不会调用函数 但可以改变this的指向
+    // 2.返回的是改变this指向之后的新函数
+
+    // bind()应用
+    var btns = document.querySelectorAll('button');
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].addEventListener('click', function () {
+            this.disabled = true;
+            setTimeout(function() {
+                this.disabled = false;
+            }.bind(this), 2000)
+        })
+    }
+</script>
+
+</html>

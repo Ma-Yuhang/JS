@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 浅拷贝   只拷贝一层 改变o.msg里面的数据 会影响obj里的数据
+        var obj = {
+            id: 1,
+            name: 'andy',
+            msg: {
+                age: 18
+            },
+            color: ['pink', 'red']
+        };
+        var o = {};
+        // 用for循环做
+        // for(var k in obj) {
+        //     // k 属性名 obj 属性值
+        //     o[k] = obj[k];
+        // }
+        // Object.assign() 也是浅拷贝
+        // Object.assign(o, obj);
+        // o.name = 'aa';  // 不会影响obj里的数据
+        // o.msg.age = 20; // 会影响
+        // console.log(o);
+        // console.log(obj);
+
+        // 深拷贝
+        // 封装一个函数
+        function deepCopy(newObj, oldObj) {
+            for (var k in oldObj) {
+                // 1.获取属性值
+                var item = oldObj[k];
+                // 2.判断是否是数组
+                // 数组要写在对象的上边 因为数组也属于Object
+                if (item instanceof Array) {
+                    newObj[k] = [];
+                    deepCopy(newObj[k], item);
+                } else if (item instanceof Object) {
+                    // 判断是否是对象
+                    newObj[k] = {};
+                    deepCopy(newObj[k], item);
+                } else {
+                    // 是简单数据类型
+                    newObj[k] = item;
+                }
+            }
+        }
+        deepCopy(o, obj);
+        o.name = 'aa';
+        o.msg.age = 20;
+        console.log(o);
+        console.log(obj);
+    </script>
+</body>
+
+</html>

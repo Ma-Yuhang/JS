@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .zong {
+            width: 80px;
+            height: 22px;
+            margin: 200px auto;
+            border: 1px solid #cacbcb;
+        }
+
+        .zuo,
+        .you {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+            width: 15px;
+            text-align: center;
+            color: #666;
+            background: #fff;
+            text-decoration: none;
+            font-size: 12px;
+        }
+        .zuo {
+            border-right: 1px solid #cacbcb;
+        }
+        .you {
+            border-left: 1px solid #cacbcb;
+        }
+        .c {
+            float: left;
+            width: 48px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 12px;
+            font-family: verdana;
+            color: #333;
+            border: 0;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="zong">
+        <a href="javascript:;" class="zuo">-</a>
+        <input type="text" class="c" value="1">
+        <a href="javascript:;" class="you">+</a>
+    </div>
+    <script>
+        $(function() {
+            $(".you").click(function() {
+                var n = $(this).siblings("input").val();
+                n++;
+                $(this).siblings("input").val(n);
+            })
+            $(".zuo").click(function() {
+                var n = $(this).siblings("input").val();
+                if(n <= 1) {
+                    return false;
+                }
+                n--;
+                $(this).siblings("input").val(n);
+            })
+            // 如果用户输入小于1的数，那么需要把value改为1
+            $(".c").change(function() {
+                // alert(11);
+                if($(this).val() <= 1) {
+                    $(this).val(1);
+                }
+            })
+        })
+
+        // var zuo = document.querySelector('.zuo');
+        // var you = document.querySelector('.you');
+        // var input = document.querySelector('.c');
+        
+        // you.addEventListener('click', function() {
+        //     var n = you.parentNode.children[1].value;
+        //     n++;
+        //     // console.log(n);
+        //     you.parentNode.children[1].value = n;
+
+        // })
+        // zuo.addEventListener('click', function() {
+        //     var n = zuo.parentNode.children[1].value;
+        //     if(n == 1) {
+        //         return false;
+        //     }
+        //     n--;
+        //     // console.log(n);
+        //     zuo.parentNode.children[1].value = n;
+
+        // })
+    </script>
+</body>
+
+</html>

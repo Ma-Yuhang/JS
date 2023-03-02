@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // filter主要用于筛选数组 注意返回一个新数组
+        // 也是可以传入三个参数 可以省略 第一个是当前元素 第二个是当前元素的索引号 第三个是数组本身
+        let arr = [2,22,34,56,7];
+        let newArr = arr.filter((value, index) => {
+            return value > 10;
+        })
+        console.log(newArr);
+    </script>
+</body>
+</html>

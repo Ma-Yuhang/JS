@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="http://www.baidu.com">baidu</a>
+</body>
+<script>
+    var a = document.querySelector('a');
+    a.addEventListener('click',function(e) {
+        e.preventDefault(); //dom标准写法
+    })
+
+    a.onclick = function(e) {
+        // e.preventDefault(); 方法  普通浏览器
+        // e.returnValue; 属性 低版本浏览器
+        return false; //也能阻止默认行为，没有兼容性。 特点：后面的代码不执行
+    }
+</script>
+</html>

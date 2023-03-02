@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+    </style>
+    <script src="jQuery.min.js"></script>
+</head>
+
+<body>
+    <button>下滑</button>
+    <button>上滑</button>
+    <button>切换</button>
+    <div></div>
+
+</body>
+<script>
+    $(function () {
+        $('button').eq(0).click(function () {
+            $('div').slideDown(200, function () {
+                alert(1);
+            })
+        })
+        $('button').eq(1).click(function () {
+            $('div').slideUp(200, function () {
+                alert(1);
+            })
+        })
+        $('button').eq(2).click(function () {
+            $('div').slideToggle(200, function () {
+            })
+        })
+    })
+</script>
+
+</html>

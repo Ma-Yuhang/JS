@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // \d 匹配0-9之间的任一数字 相当于 [0-9]
+        // \D 相当于[^0-9]
+        // \w 相当于[A-Za-z0-9_]
+        // \W 相当于[^A-Za-z0-9_]
+        // \s 匹配空格(包括换行符，制表符，空格符等)，相当于[\t\r\n\v\f]
+        // \S 相当于[^\t\r\n\v\f]
+        // 全国座机号码格式有两种： 010-12345678   0123-1234567
+        // var reg = /^\d{3}-\d{8}|\d{4}-\d{7}$/;
+        var reg = /^\d{3,4}-\d{7,8}$/g;
+        console.log(reg.test('1234-5678999'));
+    </script>
+</body>
+</html>

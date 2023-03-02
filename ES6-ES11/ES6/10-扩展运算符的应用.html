@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        // 1.数组的合并
+        // const arr = [1, 2, 3];
+        // const arr1 = [4, 5, 6];
+        // // const newArr = arr.concat(arr1);
+        // const newArr = [...arr, ...arr1];
+        // console.log(newArr);
+        // 2.数组的克隆
+        // const sanzhihua = ['E', 'G', 'M'];
+        // const lala = [...sanzhihua]; // 浅拷贝
+        // console.log(lala);
+        // 3.将伪数组转化为真正的数组
+        let divs = document.querySelectorAll('div');
+        console.log(divs);
+        let newdivs = [...divs];
+        console.log(newdivs);
+    </script>
+</body>
+</html>

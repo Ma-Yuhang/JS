@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+    <script>
+        // forEach循环遍历数组
+        let arr = [1,2,3,6,345,77];
+        // 第一个参数是当前的元素 第二个是当前元素的索引号 第三个是数组本身
+        arr.forEach((value, index, array) => {
+            console.log(value);
+            console.log(index);
+            console.log(array);
+        })
+
+        let btns = document.querySelectorAll('button');
+        btns.forEach((item) => {
+            item.onclick = function() {
+                alert(11);
+            }
+        })
+    </script>
+</body>
+</html>

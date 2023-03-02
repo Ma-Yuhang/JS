@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+</head>
+<body>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+</body>
+<script>
+    $(function() {
+        // 1.隐式迭代 给所有按钮都绑定了点击事件
+        $('button').click(function() {
+            // 2.当前的元素变色
+            // $(this).css('backgroundColor','pink')
+            // 3.其余元素没有颜色
+            // $(this).siblings('button').css('backgroundColor','')
+
+            // 链式编程
+            $(this).css('backgroundColor','pink').siblings().css('backgroundColor','');
+        })
+    })
+</script>
+</html>

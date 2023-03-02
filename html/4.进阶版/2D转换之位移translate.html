@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 移动盒子位置的方法：定位    盒子的外边距   2D转换移动 */
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+            transition: all .5s;
+        }
+        div:hover {
+            /* x:x轴移动的距离   y:y轴移动的距离 */
+            /* transform: translate(x,y); */
+            /* transform: translate(100px,100px); */
+            /* transform: translate(100px,0); */
+            /* transform: translateX(50%);等价于transform: translateX(100px); */
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

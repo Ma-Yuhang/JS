@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            background-color: aqua;
+        }
+    </style>
+    <script src="jQuery.min.js"></script>
+</head>
+
+<body>
+    <div></div>
+    <ul>
+        <li>aaaaaaaaa</li>
+        <li>aaaaaaaaaa</li>
+        <li>aaaaaaa</li>
+        <li>aaaaaaaa</li>
+        <p>啦啦啦啦啦</p>
+    </ul>
+    <script>
+        $(function () {
+            $("div").on({
+                click: function () {
+                    console.log("点击了");
+                },
+                mouseover: function () {
+                    console.log("鼠标经过了");
+                }
+            })
+            // 解绑div的所有事件
+            // $("div").off();
+
+            // 解绑点击事件
+            // $("div").off("click");
+
+            $("ul").on("click","li",function() {
+                alert(11);
+            })
+            $("ul").off("click","li");
+
+            // one() 只触发一次
+            $("p").one("click",function() {
+                alert("我是屁");
+            })
+        })
+    </script>
+</body>
+
+</html>

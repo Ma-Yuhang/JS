@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [1]
+        var obj = {}
+        // console.log(arr instanceof Array);
+        console.log(arr.__proto__ === Array.prototype);
+        // console.log(Array.isArray(arr));
+        // console.log(arr.constructor === Array);
+        console.log(Object.getPrototypeOf(arr) === Array.prototype);
+        // console.log(Array.prototype.isPrototypeOf(arr))
+        console.log(obj.__proto__ === Object.prototype);
+        console.log(Object.getPrototypeOf(obj) === Object.prototype);
+        console.log(Array.prototype.__proto__ === Object.prototype);
+    </script>
+</body>
+
+</html>

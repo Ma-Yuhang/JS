@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 对象里添加Symbol类型的属性
+        let game = {
+            up: function () {
+
+            },
+            down: function () {
+
+            }
+        }
+
+        // 1.自己声明一个对象
+        // let methods = {
+        //     up: Symbol(),
+        //     down: Symbol()
+        // }
+        // game[methods.up] = function() {
+        //     console.log('shang');
+        // }
+        // game[methods.down] = function() {
+        //     console.log('xia');
+        // }
+        // console.log(game);
+
+        // 2.
+        let youxi = {
+            name: '三国杀',
+            [Symbol('say')]: function () {
+                console.log('我可以发言');
+            }
+        }
+        console.log(youxi);
+    </script>
+</body>
+
+</html>

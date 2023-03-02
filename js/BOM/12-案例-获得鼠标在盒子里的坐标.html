@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        div {
+            margin: 200px auto;
+            width: 300px;
+            height: 300px;
+            background-color: springgreen;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+    var div = document.querySelector('div');
+    div.addEventListener('mousemove', function(e) {
+        // console.log(e.pageX);
+        // console.log(e.pageY);
+        console.log(div.offsetLeft);
+        console.log(div.offsetTop);
+        var x = e.pageX - div.offsetLeft;
+        var y = e.pageY - div.offsetTop;
+        div.innerHTML = 'x的坐标是' + x + 'y坐标是' + y;
+    })
+</script>
+</html>

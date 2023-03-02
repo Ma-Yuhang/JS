@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // function getRandom(min, max) {
+    //     return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
+    // }
+    // var random = getRandom(1, 50);
+    // var i = 1;
+    // while (i <= 3) {
+    //     var num = prompt('猜数字输入1到50之间的数。');
+    //     if (random > num) {
+    //         alert('猜小了，大一点。')
+    //     } else if (random < num) {
+    //         alert('猜大了，小一点。')
+    //     } else {
+    //         alert('你猜对了')
+    //         break;
+    //     }
+    //     if (i == 3 && random != num) {
+    //         alert('你只有三次机会已经用完了。')
+    //     }
+    //     i++;
+    // }
+
+    function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min; //含最大值，含最小值 
+    }
+    var random = getRandom(1, 50);
+    for (var i = 2; i >= 0; i--) {
+        var num = prompt('请您猜一个1—50的整数：');
+        if (num > random) {
+            alert('你猜大了,你还有' + i + '次机会');
+        } else if (num < random) {
+            alert('你猜小了,你还有' + i + '次机会');
+        } else if (num == random) {
+            alert('猜对了！');
+            break;
+        } else {
+            alert('输入不合法！');
+            i++;
+        }
+    }
+</script>
+
+</html>

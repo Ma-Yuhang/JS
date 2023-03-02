@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 3000px;
+        }
+
+        .w {
+            width: 1200px;
+            height: 400px;
+            margin: 100px auto;
+        }
+
+        .jiadian {
+            background-color: aqua;
+            margin-top: 400px;
+        }
+
+        .a {
+            position: absolute;
+            top: 200px;
+            left: 100px;
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        .shouji {
+            background-color: bisque;
+        }
+
+        .diannao {
+            background-color: pink;
+        }
+
+        .jiaju {
+            background-color: blue;
+        }
+
+        .current {
+            background-color: brown;
+        }
+
+        li {
+            list-style: none;
+            margin: 10px 0;
+        }
+
+        .dianti {
+            position: fixed;
+            top: 200px;
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+    <script src="jQuery.min.js"></script>
+</head>
+
+<body>
+    <div class="dianti">
+        <ul>
+            <li class="current">家用电器</li>
+            <li>手机家电</li>
+            <li>电脑办公</li>
+            <li>精品家具</li>
+        </ul>
+    </div>
+    <div class="a">--------------</div>
+    <div class="jiadian w">
+        家用电器
+    </div>
+    <div class="shouji w">
+        手机家电
+    </div>
+    <div class="diannao w">
+        电脑办公
+    </div>
+    <div class="jiaju w">
+        精品家具
+    </div>
+</body>
+<script>
+    $(function () {
+        // 节流阀 刚开始为true 当执行点击操作后，页面滚动的过程中，不显示背景颜色
+        // （即关掉滚动页面左侧楼层的显示的相关代码）。当滚动结束后，打开节流阀
+        // （即到达指定楼层后在回调函数中将flag重新设值为true）
+        var flag = true;
+        $(window).scroll(function () {
+            // 电梯显示与隐藏
+            if ($(document).scrollTop() >= $(".a").offset().top) {
+                $(".dianti").fadeIn();
+            } else {
+                $(".dianti").fadeOut();
+            }
+            // 滚动页面左侧楼层的显示
+            if (flag) {
+                $(".w").each(function (i, ele) {
+                    if ($(document).scrollTop() >= $(ele).offset().top) {
+                        $(".dianti li").eq(i).addClass("current").siblings().removeClass();
+                    }
+                })
+            }
+
+        })
+        // 点击到达指定楼层
+        $(".dianti li").click(function () {
+            flag = false;
+            // console.log($(this).index());
+            var current = $(".w").eq($(this).index()).offset().top;
+            $("body,html").stop().animate({
+                scrollTop: current
+            }, function () {
+                flag = true;
+            })
+            $(this).addClass("current").siblings().removeClass();
+        })
+    })
+</script>
+
+</html>

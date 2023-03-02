@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="form">
+        <input type="text" name="username">
+        <input type="password" name="password">
+        <input type="button" value="提交" id="btn">
+    </form>
+    <script>
+        let btn = document.querySelector('#btn');
+        let form = document.querySelector('#form');
+        btn.onclick = function() {
+            // 将普通的html表单转换为表单对象
+            let formData = new FormData(form);
+            // console.log(formData);
+
+            // console.log(formData.get('username'));
+            // set方法与append方法的区别是：  在属性名已存在的情况下
+            // set会覆盖已有键名的值      append会保留两个值
+            formData.set('username', 'mayuhang');
+            formData.append('password', '000');
+            formData.set('age', 20);
+            formData.delete('age');
+            // 创建ajax对象
+            let xhr = new XMLHttpRequest();
+            xhr.open('post', 'http://localhost:3000/formData');
+            xhr.send(formData);
+            xhr.onload = function() {
+                if(xhr.status == 200) {
+                    console.log(xhr.responseText);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.一定要赋初始值
+        // const a; 错误
+        
+        // 2.一般声明常量用大写（潜规则）
+        // const A = 100;
+
+        // 3.值不能修改
+        // const A = 1;
+        // A = 2; 错误
+
+        // 4.块级作用域
+
+        // 5.对数组和对象里面的元素进行修改 不算对常量的修改 不会报错
+        // 一般用const对数组和对象进行声明
+        const TEAM = ['UZI','MLXG','Ming','Letme'];
+        TEAM.push('Meiko');
+        console.log(TEAM);
+    </script>
+</body>
+</html>

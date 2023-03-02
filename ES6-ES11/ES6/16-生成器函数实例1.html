@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1s 后打印111 2s后打印222 3s后打印333(一共花费6秒)
+        // 之前的做法
+        // setTimeout(function () {
+        //     console.log(111);
+        //     setTimeout(function () {
+        //         console.log(222);
+        //         setTimeout(function () {
+        //             console.log(333);
+        //         }, 3000)
+        //     }, 2000)
+        // }, 1000)
+
+        function one() {
+            setTimeout(() => {
+                console.log(111);
+                iterator.next();
+            }, 1000);
+        };
+        function two() {
+            setTimeout(() => {
+                console.log(222);
+                iterator.next();
+            }, 2000);
+        };
+        function three() {
+            setTimeout(() => {
+                console.log(333);
+                iterator.next();
+            }, 3000);
+        };
+        function * gen() {
+            yield one();
+            yield two();
+            yield three();
+        }
+        let iterator = gen();
+        iterator.next();
+    </script>
+</body>
+
+</html>

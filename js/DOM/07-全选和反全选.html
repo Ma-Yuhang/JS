@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="j_cbAll"></th>
+                <th>商品</th>
+                <th>价钱</th>
+            </tr>
+        </thead>
+        <tbody id="j_tb">
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>iPhone8</td>
+                <td>5000</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>iPhone9</td>
+                <td>6000</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox"></td>
+                <td>iPhone10</td>
+                <td>7000</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    // var j_cbAll = document.getElementById('j_cbAll');
+    // var j_tbs = document.getElementById('j_tb').getElementsByTagName('input');
+    // j_cbAll.onclick = function () {
+    //     for (var i = 0; i < j_tbs.length; i++) {
+    //         j_tbs[i].checked = this.checked;
+    //     }
+    // }
+
+    // for (var i = 0; i < j_tbs.length; i++) {
+    //     j_tbs[i].onclick = function () {
+    //         var flag = true;
+    //         for (var i = 0; i < j_tbs.length; i++) {
+    //             if (!j_tbs[i].checked) {
+    //                 flag = false;
+    //             }
+    //         }
+    //         j_cbAll.checked = flag;
+    //     }
+    // }
+
+
+    var j_cbAll = document.querySelector('#j_cbAll');
+    var j_tbs = document.querySelector('#j_tb').querySelectorAll('input');
+    console.log(j_cbAll);
+    console.log(j_tbs);
+    j_cbAll.addEventListener('click', function () {
+        for (var i = 0; i < j_tbs.length; i++) {
+            j_tbs[i].checked = this.checked;
+        }
+    })
+    for (var i = 0; i < j_tbs.length; i++) {
+        j_tbs[i].addEventListener('click', function () {
+            var flag = true;
+            for(var i = 0; i<j_tbs.length; i++) {
+                if(!j_tbs[i].checked) {
+                    flag = false;
+                }
+                j_cbAll.checked = flag;
+            }
+        })
+    }
+</script>
+
+</html>

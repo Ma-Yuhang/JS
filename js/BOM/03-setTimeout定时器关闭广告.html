@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 500px;
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="../DOM/img/1.jpg" alt="" class="ad">
+</body>
+<script>
+    // 1.直接写函数
+    setTimeout(function () {
+        console.log(1);
+    }, 3000)
+    // 2.也可以先定义函数，然后写函数名
+    function fn () {
+        console.log('时间到了');
+    }
+    setTimeout(fn, 3000);
+    // setTimeout('fn()',5000); // 3.不提倡
+
+    var ad = document.querySelector('.ad');
+    setTimeout(function () {
+        ad.style.display = 'none';
+    }, 5000)
+</script>
+
+</html>

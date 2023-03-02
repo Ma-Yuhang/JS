@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <ol>
+        <li>1</li>
+        <li>2</li>
+        <li class="three">3</li>
+        <li>4</li>
+    </ol>
+    <script>
+        $(function() {
+            // 选取ul中的第一个li
+            $('ul li:first').css('backgroundColor','red');
+            // 选取索引号为2的元素
+            $('ul li:eq(2)').css('backgroundColor','blue');
+            // 选取第三个li以外的li
+            $('ol .three').siblings('li').css('backgroundColor','pink')
+        })
+    </script>
+</body>
+</html>

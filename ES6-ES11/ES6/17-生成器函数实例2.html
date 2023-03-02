@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 摸以获取 用户数据 订单数据 商品数据
+        // 先有用户数据 再有订单数据 后有商品数据
+        function getUsers() {
+            setTimeout(() => {
+                let data = ('用户数据');
+                iterator.next(data);  // 第二个next里面的参数将作为第一个yield的返回值
+            }, 1000);
+        }
+        function getOrders() {
+            setTimeout(() => {
+                let data = ('订单数据');
+                iterator.next(data);  // 第三个next里面的参数将作为第一个yield的返回值
+            }, 1000);
+        }
+        function getGoods() {
+            setTimeout(() => {
+                let data = ('商品数据');
+                iterator.next(data);  // 第四个next里面的参数将作为第一个yield的返回值
+            }, 1000);
+        }
+
+        function * gen() {
+            let users = yield getUsers();
+            console.log(users);
+            let orders = yield getOrders();
+            console.log(orders);
+            let goods = yield getGoods();
+            console.log(goods);
+        }
+        let iterator = gen();
+        iterator.next();  // 第一次调用
+    </script>
+</body>
+</html>

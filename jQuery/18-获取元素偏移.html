@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        .father {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: bisque;
+            margin: 20px;
+        }
+        .son {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            left: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+    <script>
+        // 1.获取和设置元素距离页面文档的距离（一直一body为准）
+        console.log($(".father").offset());
+        console.log($(".father").offset().top);
+        // $(".father").offset({
+        //     left:200,
+        //     top:200
+        // });
+        // 2.获取元素距离带有定位的父级的距离（没有父级或父级没有定位则以body为准）
+        // 只能获取不能修改
+            console.log($(".son").position());;
+    </script>
+</body>
+</html>

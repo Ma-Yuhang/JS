@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        tr {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <table align="center" id="box" width="800px">
+        
+    </table>
+    <!-- 模板引擎 -->
+    <script type="text/html" id="tpl">
+        <tr>
+            <th>时间</th>
+            <th>温度</th>
+            <th>天气</th>
+            <th>风向</th>
+            <th>风力</th>
+        </tr>
+        {{each info}}
+        <tr>
+            <td>{{dateFormat($value.update_time)}}</td>
+            <td>{{$value.degree}}</td>
+            <td>{{$value.weather}}</td>
+            <td>{{$value.wind_direction}}</td>
+            <td>{{$value.wind_power}}</td>
+        </tr>
+        {{/each}}
+    </script>
+    <!-- 引入封装好的jsonp函数 -->
+    <script src="jsonp封装.js"></script>
+    <!-- 引入模板引擎js -->
+    <script src="template-web.js"></script>
+    <script>
+        let box = document.querySelector('#box');
+
+        function dateFormat(data) {
+            // console.log(data);
+            let year = data.substr(0, 4);
+            let month = data.substr(4, 2);
+            let day = data.substr(6, 2);
+            let hour = data.substr(8, 2);
+            return year + '年' + month + '月' + day + '日' + hour + '时';
+        }
+        // 向模板中开放外部变量
+        template.defaults.imports.dateFormat = dateFormat;
+        
+        jsonp({
+            url: 'https://wis.qq.com/weather/common',
+            data: {
+                source: 'pc',
+                // weather_type: 'forecast_1h|forecast_24h',
+                weather_type: 'forecast_1h',
+                province: '浙江省',
+                city: '嘉兴市'
+            },
+            success: function(data) {
+                // console.log(data);
+                let html = template('tpl', {info: data.data.forecast_1h});
+                box.innerHTML = html;
+            }
+        })
+    </script>
+</body>
+</html>

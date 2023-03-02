@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let name = '尚硅谷';
+        let change = function() {
+            console.log('我们可以改变你');
+        }
+        const school = {
+            name,
+            change,
+            // improve: function() {
+            //     console.log('lala');
+            // }
+            // 等价于
+            improve() {
+                console.log('lala');
+            }
+        }
+        console.log(school);
+    </script>
+</body>
+</html>

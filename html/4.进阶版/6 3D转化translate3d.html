@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            /* 要想有3d效果，需要给父级加透视 */
+            /* 透视 和 translateZ 单位都是 像素px  */
+            /* 透视（即视距）越大看到的效果图越小 */
+            /* translateZ越大看到的效果图越大 */
+            perspective: 500px;
+        }
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            transition: all 1s;
+        }
+        div:hover {
+            /* transform: translate3d(x,y,z); */
+            transform: translate3d(300px,100px,100px);
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

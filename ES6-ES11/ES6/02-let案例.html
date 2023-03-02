@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            margin-right: 20px;
+        }
+        .pink {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <h2>点击切换颜色</h2>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        let divs = document.querySelectorAll('div');
+        for(let i = 0; i < divs.length; i++) {
+            divs[i].onclick = function() {
+            // 用let声明 i 可以这样写 divs[i].classList
+            // 用var声明 i 必须写this.classList
+            divs[i].classList.toggle('pink'); 
+            }
+        }
+    </script>
+</body>
+</html>

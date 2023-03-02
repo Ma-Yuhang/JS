@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            position: absolute;
+            left: 0px;
+            width: 100px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+<script>
+    // 动画原理
+    // 1.获得盒子当前位置
+    // 2.让盒子在当前位置加上1个移动距离
+    // 3.利用定时器不断循环操作
+    // 4.关闭定时器
+    // 注意：盒子一定要有定位 利盒子的left 和 top 移动
+    var div = document.querySelector('div');
+    var timer = setInterval(function() {
+        if(div.offsetLeft == 300) {
+            clearInterval(timer);
+        } else {
+            div.style.left = div.offsetLeft + 1 + 'px';
+        }
+    }, 10)
+</script>
+</html>

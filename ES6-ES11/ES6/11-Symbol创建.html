@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建Symbol 不能与其他数据进行运算和比较
+        let s = Symbol();
+        console.log(s, typeof s);
+        let s2 = Symbol('尚硅谷');
+        let s3 = Symbol('尚硅谷');
+        console.log(s2 === s3); // flase
+        // Symbol.for创建
+        let s4 = Symbol.for('尚硅谷');
+        let s5 = Symbol.for('尚硅谷');
+        console.log(s4 === s5);  // true
+
+    </script>
+</body>
+</html>

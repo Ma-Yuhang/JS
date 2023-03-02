@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // var num = 0;
+    // var op = prompt('简易计算器:\n1.加法运算\n2.减法运算\n3.乘法运算\n4.除法运算\n请输入你的操作:')
+    // function jisuan(shuzi) {
+    //     var num1 = parseFloat(prompt('输入第一个数'));
+    //     var num2 = parseFloat(prompt('输入第二个数'));
+    //     switch (shuzi) {
+    //         case '1':
+    //             num = num1 + num2;
+    //             break;
+    //         case '2':
+    //             num = num1 - num2;
+    //             break;
+    //         case '3':
+    //             num = num1 * num2;
+    //             break;
+    //         case '4':
+    //             num = num1 / num2;
+    //             break;
+    //     }
+    //     return num;
+    // }
+    // alert('计算结果为:' + jisuan(op));
+
+
+
+    // var tan = prompt('1.+运算\n2.减法运算\n3.乘法运算\n4.除法运算\n5.退出');
+    //     //函数的特点，因为本身的特性，函数调用执行完毕，就垃圾回收
+    //     function jisuan(shuzi) {
+    //         var num1 = parseInt(prompt('第一个数字'));
+    //         var num2 = parseInt(prompt('第二个数字'));
+    //         var result;
+    //         switch (parseInt(shuzi)) {
+    //             // 判断要输入的状态
+    //             case 1:
+    //                 result = num1 + num2;
+    //                 break;
+    //             case 2:
+    //                 result = num1 - num2;
+    //                 break;
+    //             case 3:
+    //                 result = num1 * num2;
+    //                 break;
+    //             case 4:
+    //                 result = num1 / num2;
+    //                 break;
+    //             case 5:
+    //                 break;
+    //         }
+    //         alert(result);
+    //     }
+    //     jisuan(tan)
+
+
+    var num = 0;
+    var op = prompt('简易计算器:\n1.加法运算\n2.减法运算\n3.乘法运算\n4.除法运算\n请输入你的操作:')
+    function jisuan(num1,num2) {
+
+        switch (op) {
+            case '1':
+                num = num1 + num2;
+                break;
+            case '2':
+                num = num1 - num2;
+                break;
+            case '3':
+                num = num1 * num2;
+                break;
+            case '4':
+                num = num1 / num2;
+                break;
+        }
+        return num;
+    }
+    var num1 = parseFloat(prompt('输入第一个数'));
+    var num2 = parseFloat(prompt('输入第二个数'));
+    jisuan(num1,num2);
+
+    alert('计算结果为:' + jisuan(num1,num2));
+</script>
+
+</html>

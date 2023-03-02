@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+</body>
+<input type="text"> <button>提交</button>
+<div></div>
+<script>
+    // trim() 去除字符串两侧空格,不会去除字符串中间的空格
+    var str = '  andy  ';
+    console.log(str);
+    var str1 = str.trim();
+    console.log(str1);
+
+    var input = document.querySelector('input');
+    var button = document.querySelector('button');
+    var div = document.querySelector('div');
+    button.addEventListener('click', function() {
+        if(input.value.trim() === '') {
+            alert('请输入内容');
+        } else {
+            div.innerHTML = input.value.trim();
+        }
+        input.value = '';
+    })
+</script>
+</html>

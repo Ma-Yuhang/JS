@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .a li:first-child {
+            color: blue;
+        }
+        .a li:last-child {
+            color: blueviolet;
+        }
+        .a li:nth-child(6) {
+            color: brown;
+        }
+        /* :nth-child(n) n可以是数字，关键字和公式，如果是数字表示选取第几个元素 */
+        .a li:nth-child(1) {
+            background-color: cornsilk;
+        }
+        /* 关键字：even表示选取偶数元素     odd表示选取奇数元素 */
+        .b li:nth-child(even) {
+            color: cyan;
+        }
+        .b li:nth-child(odd) {
+            color: red;
+        }
+        /* 公式：n从0开始每次加1，5n代表取第5，10，15，20……个元素
+            2n表示取偶数，2n+1表示取奇数 */
+        .c li:nth-child(5n) {
+            color: red ;
+        }
+    </style>
+</head>
+<body>
+    <ul class="a">
+        <li>我是第一个孩子</li>
+        <li>我是第二个孩子</li>
+        <li>我是第三个孩子</li>
+        <li>我是第四个孩子</li>
+        <li>我是第五个孩子</li>
+        <li>我是第六个孩子</li>
+        <li>我是第七个孩子</li>
+    </ul>
+    <div>
+        <ul class="b">
+            <li>我是第一个孩子</li>
+            <li>我是第二个孩子</li>
+            <li>我是第三个孩子</li>
+            <li>我是第四个孩子</li>
+            <li>我是第五个孩子</li>
+            <li>我是第六个孩子</li>
+            <li>我是第七个孩子</li>
+        </ul>
+    </div>
+    <div>
+        <ul class="c">
+            <li>我是第一个孩子</li>
+            <li>我是第二个孩子</li>
+            <li>我是第三个孩子</li>
+            <li>我是第四个孩子</li>
+            <li>我是第五个孩子</li>
+            <li>我是第六个孩子</li>
+            <li>我是第七个孩子</li>
+            <li>我是第八个孩子</li>
+            <li>我是第九个孩子</li>
+            <li>我是第十个孩子</li>
+        </ul>
+    </div>
+</body>
+</html>

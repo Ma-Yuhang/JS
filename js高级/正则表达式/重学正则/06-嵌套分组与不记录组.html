@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let hd = `
+        https://www.houdunren.com
+        http://houdunwang.com
+        https://hdcms.com
+        `;
+        let reg = /https?:\/\/((?:\w+\.)?\w+\.(?:com|cn|org))/gi;
+        // console.dir(hd.match(reg));
+        // let urls = [...hd.match(reg)];
+        // console.log(urls);
+
+        // console.log(reg.test(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+
+        // let urls = [];
+        // while(res = reg.exec(hd)) {
+        //     urls.push(res[1]);
+        // }
+        // console.log(urls);
+    </script>
+</body>
+</html>

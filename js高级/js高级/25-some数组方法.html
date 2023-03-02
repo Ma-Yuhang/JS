@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // some 查找数组中满足条件的元素
+        // 如果找到第一个满足条件的值 就终止循环 不再继续查找
+        // 返回值是一个布尔值 找到就返回true 找不到就返回false
+        let arr = ['pink', 'red', 'white', 'black'];
+        let flag = arr.some((value) => {
+            return value == 'pink';
+        })
+        console.log(flag);
+    </script>
+</body>
+</html>

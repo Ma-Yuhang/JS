@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 箭头函数适合于 this无关的回调  定时器 数组方法的回调
+        // 不适合与 this 有关的回调   事件回调 对象的方法
+
+        // 需求1 点了div后 2s 变成粉色
+        let div = document.querySelector('div');
+        // 以前的做法
+        // div.addEventListener('click', function() {
+        //     setTimeout(function() {
+        //         this.style.backgroundColor = 'pink';
+        //     }.bind(this), 2000)
+        // })
+        // 用箭头函数做
+        div.addEventListener('click', function() {
+            setTimeout(() => {
+                // 这里的this始终指向div
+                this.style.backgroundColor = 'pink';
+            }, 2000)
+        })
+
+        // 需求2 筛选出数组中偶数的元素
+        const arr = [1, 4, 66, 74, 3];
+        // const newArr = arr.filter(function(n) {
+        //     return n % 2 === 0;
+        // });
+        // console.log(newArr);
+        // 箭头函数
+        const newArr = arr.filter(n => n % 2 === 0);
+        console.log(newArr);
+    </script>
+</body>
+</html>

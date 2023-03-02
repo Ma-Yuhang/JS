@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1.可以做多个状态的变化，里面的百分比必须是整数
+           2.百分比是按照时间划分的。这个案列总的时间为8秒 */
+        @keyframes move {
+            0% {
+                transform: translate(0, 0);
+            }
+            /* 花费两秒到这 */
+            25% {
+                transform: translate(1200px,0);
+            }
+            /* 从上一步到这花费2s，一共4s */
+            50% {
+                transform: translate(1200px,5a00px);
+            }
+            /* 从上一步到这花费2s，一共6s */
+            75% {
+                transform: translate(0,500px);
+            }
+            /* 从上一步到这花费2s，一共8s 结束 */
+            100% {
+                transform: translate(0,0);
+            }
+        }
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            animation-name: move;
+            animation-duration: 8s;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 挑选出数字
+        let hd = "sejkdbnbj23545ajksdbn34";
+        // console.log(Number.isNaN(parseInt('a')));
+
+        // let n = [...hd].filter(a => !Number.isNaN(parseInt(a)));
+        // console.log(n.join(""));
+
+        // 正则做法
+        let n = hd.match(/\d/g);
+        console.log(n.join(""));
+    </script>
+</body>
+</html>

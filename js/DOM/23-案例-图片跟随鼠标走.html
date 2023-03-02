@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 10%;
+            height: 10%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <img src="img/中午好.jpg" alt="">
+</body>
+<script>
+    var img = document.querySelector('img');
+    document.addEventListener('mousemove',function(e) {
+        var x = e.pageX;
+        var y = e.pageY;
+        // 注意要加单位 px
+        img.style.left = x - 100 + 'px';
+        img.style.top = y - 50 + 'px';
+    })
+</script>
+</html>

@@ -1,0 +1,12 @@
+{
+    "name": "mayuhang-tools",
+    "version": "1.0.0",
+    "main": "inedx.js",
+    "description": "提供了格式化时间、HTMLEscape相关的功能",
+    "keywords": [
+        "mayuhang",
+        "dateFormat",
+        "escape"
+    ],
+    "license": "ISC"
+}

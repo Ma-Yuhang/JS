@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="400"></canvas>
+    <script>
+        const canvas = document.querySelector('canvas')
+        const ctx = canvas.getContext('2d')
+        // 开始绘制圆形
+        ctx.beginPath()
+        // 绘制圆形的arc方法 六个参数 1:圆心的x坐标 2:圆心的y坐标 3:半径 4:起始的弧度 5:结束的弧度 6:是否逆时针绘制
+        // 360° = 2π
+        ctx.arc(100, 100, 50, 0, 2 * Math.PI, false)
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.arc(200, 100, 50, 0, 1, false)
+        ctx.stroke()
+    </script>
+</body>
+
+</html>

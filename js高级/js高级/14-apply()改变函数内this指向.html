@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function fn(arr) {
+        console.log(this);
+        console.log(arr);
+    }
+    var o = {
+        name: 'andy'
+    }
+    fn.apply(o, ['pink']);
+    // 1.也可以调用函数，改变函数内this指向
+    // 2.参数必须是数组形式（伪数组）
+    // 3.主要作用：比如可以利用apply 借助数学内置对象求最大值
+    var arr = [1, 2, 3, 4];
+    var max = Math.max.apply(Math, arr);
+    var min = Math.min.apply(Math, arr);
+    console.log(max);
+    console.log(min);
+</script>
+</html>

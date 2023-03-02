@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        canvas的宽高必须写在行内(宽高属性) 不能用样式去控制
+        在canvas标签内部写任何东西都是没有意义的
+     -->
+    <canvas width="500px" height="500px">
+        <!-- 在这里写东西无意义 -->
+    </canvas>
+</body>
+<script>
+    const canvas = document.querySelector('canvas')
+    // 获取画布的‘笔’
+    const context = canvas.getContext('2d')
+    // 绘制线段：绘制线段的起点
+    context.moveTo(100, 100)
+    // 线段的其他点：可以有多个
+    context.lineTo(200, 100)
+    context.lineTo(200, 200)
+    // 设置图形填充的颜色
+    context.fillStyle = 'red'
+    context.fill()
+    // 设置线段的颜色
+    context.strokeStyle = 'green'
+    // 设置线段的宽
+    context.lineWidth = '5'
+    // 让起点和终点连在一起
+    context.closePath()
+    // 绘制线段
+    context.stroke()
+</script>
+
+</html>

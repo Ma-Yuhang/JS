@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">提交</button>
+    <script>
+        let btn = document.querySelector('#btn')
+
+
+        btn.onclick = function () {
+            // 1.创建script标签
+            const scriptNode = document.createElement('script')
+            // 2.指定src为要请求数据的地址 并把回调函数作为参数传到服务器
+            scriptNode.src = 'http://localhost:8000/jsonp_test?callback=demo'
+            // 3.将script标签放在body最后
+            document.body.appendChild(scriptNode)
+            // 4.指定回调函数
+            window.demo = (data) => {
+                // 拿到了服务器的数据 做一些操作
+                console.log(data);
+            }
+            // 5.移除使用过的script标签
+            document.body.removeChild(scriptNode)
+        }
+    </script>
+</body>
+
+</html>

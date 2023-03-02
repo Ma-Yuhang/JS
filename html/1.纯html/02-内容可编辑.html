@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+        }
+        ul,
+        div {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- contenteditable是可以在元素上设置以使内容可编辑的属性。它适用于 div、p、ul 等元素。您必须指定它. -->
+    <!-- 例如，<element contenteditable="true|false">。 -->
+
+    <!-- 注意: 当contenteditable元素上没有设置属性时，它将从其父元素继承。 -->
+    <h2> Shoppping List(Content Editable) </h2>
+    <ul class="content-editable" contenteditable="true">
+        <li> 1. Milk </li>
+        <li> 2. Bread </li>
+        <li> 3. Honey </li>
+    </ul>
+    <div contenteditable="true">
+        lalalalalala
+    </div>
+</body>
+
+</html>

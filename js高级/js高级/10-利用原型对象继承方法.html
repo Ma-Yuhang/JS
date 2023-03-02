@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function Father(uname, age) {
+        // this 指向父构造函数的对象实例
+        this.uname = uname;
+        this.age = age;
+    }
+    Father.prototype.money = function () {
+        console.log(1000);
+    }
+
+    function Son(uname, age, score) {
+        // this 指向子构造函数的对象实例
+        Father.call(this, uname, age);
+        this.score = score;
+    }
+    // 直接赋值会有问题，如果修改了子原型对象的方法，父原型对象里也会有这个方法
+    // Son.prototype = Father.prototype;
+    Son.prototype = new Father(); // 原型继承
+    // Son.prototype = Object.create(Father.prototype)  // 寄生组合继承
+    Son.prototype.constructor = Son;
+    // 这是子构造函数独有的方法
+    Son.prototype.exam = function () {
+        console.log('我要考试');
+    }
+    var son = new Son('刘德华', 18, 100);
+    let father = new Father('zs', 20)
+    console.log(son);
+    // console.log(Son.prototype.__proto__ === Father.prototype);
+    // console.log(Father.prototype);
+    // console.log(Son.prototype.constructor);
+</script>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Father {
+        say() {
+            return '我是爸爸';
+        }
+    }
+    class Son extends Father{
+        say() {
+            // console.log('我是儿子');
+            console.log(super.say() + '的儿子');
+            // super.say() 就是调用父类中的 say()函数
+        }
+    }
+    var son = new Son();
+    // 就近原则 执行儿子的方法
+    console.log(son);
+</script>
+</html>

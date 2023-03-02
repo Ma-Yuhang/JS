@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let hd = `
+        #1 js,200元 #
+        #2 php,300元 #
+        #9 houdunren.com # 后盾人
+        #3 node.js,180元 #
+        `;
+        // [{name: 'js',price: '200元'}]
+        // let lessons = hd.match(/^\s*#\d+\s+.+\s+#$/gm).map(v => {
+        //     v = v.replace(/\s*#\d+\s+/, "").replace(/\s+#/, "");
+        //     // console.log(v);
+        //     [name, price] = v.split(",");
+        //     // console.log(v.split(","));
+        //     // console.log([name, price]);
+        //     return {name, price};
+        // })
+        // console.log(lessons);
+        let reg = /#\d+\s+(.+,.+)\s#/g;
+        console.log(hd.match(reg));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        console.log(reg.exec(hd));
+        // while(res = reg.exec(hd)) {
+        //     console.log(res);
+        //     [name, price] = res[1].split(",");
+        //     console.log({name, price});
+        // }
+
+    </script>
+</body>
+
+</html>

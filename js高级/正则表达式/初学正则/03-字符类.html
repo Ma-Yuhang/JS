@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // /abc/ 是包含abc三个连着的字符串
+        // 字符类: [] 表示匹配其中的一个
+        var reg = /[abc]/;  // 只要包含a b c 其中的任意一个就行
+        console.log(reg.test('andy'));
+        console.log(reg.test('body'));
+        console.log(reg.test('city'));
+        console.log(reg.test('red'));
+        console.log('------------------');
+
+        var reg1 = /^[abc]$/;  // 必须是a b c 其中的任意一个
+        // 只有前三种情况是true 其他情况全是false
+        console.log(reg1.test('a'));
+        console.log(reg1.test('b'));
+        console.log(reg1.test('c'));
+        console.log(reg1.test('aa'));
+        console.log('------------------');
+        
+        var reg2 = /^[a-z]$/; // 26个小写英文字母匹配其中一个
+        console.log(reg2.test('z'));
+        console.log(reg2.test('A'));
+        console.log('------------------');
+        // 字符组合
+        var reg3 = /^[a-zA-Z0-9_-]$/; // 26个英文字母（大小写） 数字 下划线_ 和 -
+        console.log(reg3.test('a'));
+        console.log(reg3.test('Z'));
+        console.log(reg3.test(0));
+        console.log(reg3.test('_'));
+        console.log(reg3.test('!'));
+        console.log('------------------');
+        // 注意如果将 ^ 写在中括号里 表示取反 即不能包含括号里的字符
+        var reg4 = /^[^a-zA-Z0-9_-]$/; // 不能有26个英文字母（大小写） 数字 下划线_ 和 -
+        console.log(reg4.test('a'));
+        console.log(reg4.test('Z'));
+        console.log(reg4.test(0));
+        console.log(reg4.test('_'));
+        console.log(reg4.test('!'));
+        console.log('------------------');
+        var reg5 = /[0-9]/;
+        console.log(reg5.test(123));
+    </script>
+</body>
+</html>

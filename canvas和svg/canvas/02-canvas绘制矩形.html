@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas width="600" height="300"></canvas>
+</body>
+<script>
+    const canvas = document.querySelector('canvas')
+    const context = canvas.getContext('2d')
+    // 方式一 用绘制线段的方法
+    context.moveTo(50, 300)
+    context.lineTo(50, 100)
+    context.lineTo(150, 100)
+    context.lineTo(150, 300)
+    // context.closePath()
+    // context.fillStyle = 'red'
+    // context.fill()
+    context.stroke()
+    // 方式二 contrxt.strokeRect() 无法设置填充颜色
+    // 四个参数 第一个点的x和y width height
+    context.strokeRect(250, 100, 100, 200)
+    // 方式三 context.fillRect()
+    context.fillStyle = 'red'
+    context.fill()
+    context.fillRect(450, 100, 100, 200)
+</script>
+
+</html>

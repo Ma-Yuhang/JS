@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 200px;
+            height: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <button>提交</button>
+    <div></div>
+    <script>
+        const btn = document.querySelector('button');
+        const div = document.getElementsByTagName('div')[0];
+        btn.onclick = function() {
+            const xhr = new XMLHttpRequest();
+            xhr.responseType = 'json';
+            xhr.timeout = 2000;
+            xhr.ontimeout = function() {
+                alert('超时');
+            }
+            xhr.onerror = function() {
+                alert('网络异常');
+            }
+            xhr.open('GET','http://127.0.0.1:8000/json-server');
+            xhr.send();
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState === 4) {
+                    if(xhr.status >= 200 && xhr.status < 300) {
+                        console.log(xhr.response);
+                        div.innerHTML = xhr.response.name;
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

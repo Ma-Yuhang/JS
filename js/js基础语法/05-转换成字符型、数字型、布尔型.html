@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  // 转换成字符型：
+  // 1. 变量.toString()
+  var age = 18;
+  var str = age.toString();
+  // 2. String(变量)
+  var str = String(age);
+  // 3. 隐式转换(重点掌握)
+  var str = age + "";
+
+  // 转换成数字型：
+  // 1. parseInt(string)函数
+  var str1 = '18';
+  var str2 = '18.1';
+  var str3 = '18abc';
+  var str = true;
+  console.log(parseInt(str1));  //数字 18
+  console.log(parseInt(str2));  //数字 18
+  console.log(parseInt(str3));  //数字 18
+  // 2. parseFlost(string)函数
+  var str4 = '3.14';
+  var str5 = '3.14.2';
+  var str6 = '3.14abc';
+  console.log(parseFloat(str4));             //3.14
+  console.log(parseFloat(str5));              //3,14
+  console.log(parseFloat(str6));                 //3.14
+  // 3.Number()
+  // 4.隐式转换 ('- 0'或'* 1'或'/ 1')
+  console.log(str1 -  0);   // 数字18
+</script>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <datalist>标签指定了一个预定义选项列表，并允许用户向其中添加更多选项。
+    它提供了一项autocomplete功能，允许您通过预先输入获得所需的选项。 -->
+    <form action="" method="get">
+        <label for="fruit">Choose your fruit from the list:</label>
+        <input list="fruits" name="fruit" id="fruit">
+        <datalist id="fruits">
+            <option value="Apple">
+            <option value="Orange">
+            <option value="Banana">
+            <option value="Mango">
+            <option value="Avacado">
+        </datalist>
+        <input type="submit">
+    </form>
+</body>
+
+</html>

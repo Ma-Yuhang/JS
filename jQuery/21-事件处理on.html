@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            width: 200px;
+            background-color: aqua;
+        }
+
+        .current {
+            background-color: black;
+        }
+    </style>
+    <script src="jQuery.min.js"></script>
+</head>
+
+<body>
+    <div>
+    </div>
+    <ul>
+        <li>啦啦啦啦</li>
+        <li>啦啦啦啦</li>
+        <li>啦啦啦啦</li>
+        <li>啦啦啦啦</li>
+        <li>啦啦啦啦</li>
+    </ul>
+    <ol></ol>
+</body>
+<script>
+    $(function () {
+        // 1.单个事件注册
+        // $("div").click(function() {
+        //     $(this).css("backgroundColor","pink");
+        // })
+        // $("div").mouseenter(function() {
+        //     $(this).css("backgroundColor","red");
+        // })
+
+        // 2.事件处理on
+        // (1) 可以绑定多个事件对象
+        // $("div").on({
+        //     click: function() {
+        //         $(this).css("backgroundColor","pink");
+        //     },
+        //     mouseenter: function() {
+        //         $(this).css("backgroundColor","red");
+        //     },
+        //     mouseleave: function() {
+        //         $(this).css("backgroundColor","blue");
+        //     }
+        // })
+
+        // $("div").on("mouseenter mouseleave",function() {
+        //     $(this).toggleClass("current");
+        // })
+
+        // (2).事件委派
+
+        // 不用on绑定事件 是用隐式迭代给每一个小li绑定点击事件
+        // $("ul li").click(function() {
+        //     $(this).css("backgroundColor","pink").siblings().css("backgroundColor","");
+        // })  
+
+        // 用on绑定事件是给父元素ul绑定点击事件
+        // $("ul").on("click", "li", function () {
+        //     console.log($(this).index());
+        //     $(this).css("backgroundColor", "pink").siblings().css("backgroundColor", "");
+        // })
+        // (3) on可以给未来创建的元素动态绑定事件
+        // $("ol li").click(function () {
+        //     alert(11);
+        // })
+        $("ol").on("click","li",function() {
+            alert(22);
+        })
+        var li = $("<li>后来创建的</li>")
+        $("ol").append(li);
+    })
+
+</script>
+
+</html>

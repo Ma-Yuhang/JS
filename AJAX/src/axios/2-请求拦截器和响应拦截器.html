@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./js/axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn">提交</button>
+    <script>
+        // axios请求拦截器 一个回调
+        axios.interceptors.request.use(config => {
+            console.log('请求拦截器触发了');
+            // 满足什么条件后
+            if (Date.now() % 2 === 0) {
+                // 执行一些操作
+                config.headers.token = 'auguigu'
+                // console.log(config);
+            }
+            // 否则不执行操作
+            return config
+        })
+
+        // axios响应拦截器 两个回调
+        axios.interceptors.response.use(
+            // 响应成功
+            response => {
+                console.log('响应拦截器成功的回调执行了', response);
+                if (Date.now() % 2 === 0) return response.data
+                else return '时间戳不是偶数，不能给你数据'
+            },
+            // 响应失败
+            error => {
+                console.log('响应失败的回调执行了', error);
+                return new Promise(() => { })
+            }
+        )
+
+        const btn = document.querySelector('#btn')
+        btn.onclick = async () => {
+            const result = await axios.get('http://127.0.0.1:8000/axios-server')
+            console.log('请求成功了', result);
+        }
+    </script>
+</body>
+
+</html>

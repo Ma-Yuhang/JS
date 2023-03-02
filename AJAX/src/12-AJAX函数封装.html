@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function ajax(options) {
+            // defults对象中为默认值 如果没有传入相应参数则使用默认值
+            // 传入则用options对象覆盖defults中相应的参数
+            const defults = {
+                type: 'get',
+                url: '',
+                data: {},
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                success: function () { },
+                error: function () { }
+            };
+            // 如果没有传入使用默认值，传入则覆盖默认值
+            Object.assign(defults, options);
+            const xhr = new XMLHttpRequest();
+            let params = '';
+            for (k in defults.data) {
+                // 将参数转为字符串格式
+                // nama=zhangsan&age=20
+                params += k + '=' + defults.data[k] + '&';
+            }
+            // 截取掉最后一个 '&'
+            params = params.substr(0, params.length - 1);
+            // console.log(params);
+            if (defults.type == 'get') {
+                // 如果为get请求，将参数写在url后边
+                defults.url = defults.url + '?' + params;
+            }
+
+            xhr.open(defults.type, defults.url);
+            if (defults.type == 'post') {
+                let contentType = defults.header['Content-Type'];
+                // 如果为post请求
+                // 必须设置请求头
+                xhr.setRequestHeader('Content-Type', contentType);
+                if (contentType == 'application/json') {
+                    xhr.send(JSON.stringify(defults.data));
+                } else {
+                    xhr.send(params);
+                }
+            } else {
+                xhr.send();
+            }
+            xhr.onload = function () {
+
+                // console.log(xhr.getResponseHeader('Content-Type'));
+                // 响应头中的数据  判断是什么类型
+                let type = xhr.getResponseHeader('Content-Type');
+                // 服务器端返回的数据
+                let responseText = xhr.responseText;
+                // 如果响应类型中包含application/json
+                if (type.includes('application/json')) {
+                    // 将json字符串转化为json对象
+                    responseText = JSON.parse(responseText);
+
+                }
+                if (xhr.status === 200) {
+                    defults.success(responseText);
+                } else {
+                    defults.error(responseText, xhr);
+                }
+            }
+        }
+
+        ajax({
+            // type: 'get',
+            url: 'http://localhost:3000/json',
+            data: {
+                name: 'mayuhang',
+                age: 20
+            },
+            success: function (data) {
+                console.log('成功函数');
+                console.log(data);
+            },
+            // header: {
+            //     'Content-Type': 'application/x-www-form-urlencoded'
+            // },
+            error: function (data, xhr) {
+                console.log('失败函数');
+                console.log(data);
+                console.log(xhr);
+            }
+        })
+        // 当请求参数为字符串格式
+        // name=zhangsan&age=20
+        // xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+        // 当请求参数为json格式
+        // {name: 'zhangsan', age: 20}
+    </script>
+</body>
+
+</html>
