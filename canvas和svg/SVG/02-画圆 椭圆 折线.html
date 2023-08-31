@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    circle {
+      /* 去掉填充 */
+      fill: transparent;
+      stroke: red;
+    }
+    ellipse {
+      fill: blueviolet;
+    }
+    polyline {
+      fill: transparent;
+      stroke: red;
+    }
+    polygon {
+      fill: transparent;
+      stroke: red;
+    }
+    text {
+      stroke: blue;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    SVG: 矢量图 放大不会失真 通常动画较少或较简单，用标签和css画 
+    Canvas: 适合小面积的绘图，适合动画 用js画
+  -->
+  <svg width="500px" height="300px" style="border: 1px solid">
+    <circle r="50" cx="100" cy="200"></circle>
+    <ellipse rx="100" ry="50" cx="200" cy="100"></ellipse>
+    <!-- 折线 默认填充 -->
+    <!-- <polyline points="200 200, 300 200, 250, 300, 200 270"></polyline> -->
+    <!-- 多边形 默认填充 跟polyline的区别是polygon会连接首尾 -->
+    <polygon points="200 200, 300 200, 250, 300, 200 270"></polygon>
+    <text x="0" y="10">很爱很爱你</text>
+  </svg>
+</body>
+</html>

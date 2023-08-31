@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <svg width="500px" height="300px" style="border: 1px solid">
+
+    <!-- 定义一个渐变 -->
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="100%" y2="0">
+        <stop offset="0%" style="stop-color: red"></stop>
+        <stop offset="100%" style="stop-color: pink"></stop>
+      </linearGradient>
+    </defs>
+
+    <rect height="100" width="200" x="100" y="100" style="fill: url(#bg)"></rect>
+  </svg>
+</body>
+</html>

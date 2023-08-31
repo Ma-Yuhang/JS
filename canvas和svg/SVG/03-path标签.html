@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    path {
+      fill: transparent;
+      stroke: red;
+    }
+  </style>
+</head>
+<body>
+  <svg width="500px" height="300px" style="border: 1px solid">
+    <!-- 大写表示绝对位置 小写表示相对位置 -->
+    <!-- 
+      M: moveTo
+      L: lineTo
+      H: 水平位置
+      V: 竖直位置
+      z: 闭合(不区分大小写)
+    -->
+    <path d="M 100 100 L 200 100 l 0 100 H 400 v 50 z"></path>
+  </svg>
+</body>
+</html>

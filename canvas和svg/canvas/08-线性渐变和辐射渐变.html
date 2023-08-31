@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas width="500px" height="300px" style="outline: 1px solid;"></canvas>
+  <script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    ctx.beginPath()
+    ctx.translate(100, 100)
+    // 线性渐变
+    const bg = ctx.createLinearGradient(0, 0, 200, 0)
+    // 辐射渐变
+    // const bg = ctx.createRadialGradient(100,100,30,100,100,100)
+    bg.addColorStop(0, 'white')
+    bg.addColorStop(0.5, 'black')
+    bg.addColorStop(1, 'white')
+    ctx.fillStyle = bg
+    ctx.fillRect(0, 0, 200, 200)
+  </script>
+</body>
+
+</html>

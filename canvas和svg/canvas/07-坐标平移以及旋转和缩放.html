@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      outline: 1px solid;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas width="500px" height="500px"></canvas>
+  <script>
+    const canvas = document.querySelector('canvas')
+    const ctx = canvas.getContext('2d')
+    // 画一个线段
+    ctx.beginPath()
+    ctx.save() // 保存原始坐标信息
+    ctx.translate(100,100) // 将画布原点变为100，100
+    ctx.rotate(Math.PI / 6) // 旋转45度 根据变化后的原点进行旋转
+    ctx.moveTo(0, 0)
+    ctx.lineTo(100, 0)
+    ctx.stroke()
+    // 画一个矩形(会受到第一个改变原点的影响)
+    ctx.restore() // 使用原始坐标信息
+    ctx.beginPath()
+    ctx.scale(1, 2)
+    ctx.fillRect(200, 100, 100, 100)
+    ctx.stroke()
+  </script>
+</body>
+
+</html>

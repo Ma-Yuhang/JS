@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .line1 {
+      stroke: black;
+      stroke-width: 3px;
+    }
+    .line2 {
+      stroke: red;
+      stroke-width: 5px;
+    }
+    polyline {
+      fill: blueviolet;
+    }
+  </style>
+</head>
+<body>
+  <!-- 
+    SVG: 矢量图 放大不会失真 通常动画较少或较简单，用标签和css画 
+    Canvas: 适合小面积的绘图，适合动画 用js画
+  -->
+  <svg width="500px" height="300px" style="border: 1px solid">
+    <line class="line1" x1="100" y1="100" x2="200" y2="100"></line>
+    <line class="line2" x1="200" y1="100" x2="200" y2="200"></line>
+    <rect height="100" width="50" x="0" y="0" rx="10"></rect>
+  </svg>
+</body>
+</html>
