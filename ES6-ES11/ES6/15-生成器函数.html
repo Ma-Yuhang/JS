@@ -10,12 +10,19 @@
 
 <body>
     <script>
-        // 异步编程
-        function* fn() {
-            console.log('lala');
+        // 异步编程Generator
+        function* test() {
+            console.log('第一次执行');
+            const a = yield 1
+            console.log('第二次执行');
+            yield 2
+            console.log('第三次执行');
+            return 10 // 迭代结束时的值
         }
-        fn().next();
-        console.log(a);
+        const generator = test()
+        console.log(generator.next());
+        console.log(generator.next());
+        console.log(generator.next());
     </script>
 </body>
 

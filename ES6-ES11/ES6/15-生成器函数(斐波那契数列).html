@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function* createFeiBoGenerator() {
+            let prev1 = 1
+            let prev2 = 1
+            let i = 1
+            while (true) {
+                if (i <= 2) {
+                    yield 1
+                } else {
+                    const newValue = prev1 + prev2
+                    yield newValue
+                    prev1 = prev2
+                    prev2 = newValue
+                }
+                i++
+            }
+        }
+        let iterator = createFeiBoGenerator()
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+    </script>
+</body>
+
+</html>

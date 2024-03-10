@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 斐波那契数列
+        // 使用迭代器取一个无限长的数据
+        function createFeiBoIterator() {
+            let prev1 = 1
+            let prev2 = 1
+            let i = 1 // 当前是第几个
+            return {
+                next() {
+                    let value
+                    if (i <= 2) {
+                        value = 1
+                    } else {
+                        value = prev1 + prev2
+                    }
+                    const result = {
+                        value,
+                        done: false
+                    }
+                    prev1 = prev2
+                    prev2 = result.value
+                    i++
+                    return result
+                }
+            }
+        }
+        let iterator = createFeiBoIterator()
+    </script>
+</body>
+
+</html>

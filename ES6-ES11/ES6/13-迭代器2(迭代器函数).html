@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 迭代数组
+        // 什么是迭代器?
+        // 迭代器是一个对象，拥有next方法，next方法返回一个对象为{value: xxx, done: ccc}
+        const arr1 = [1, 2, 3, 4, 5]
+        const arr2 = [6, 7, 8, 9]
+
+        // 创建一个迭代器函数
+        function createIterator(arr) {
+            let i = 0 // 当前项
+            return {
+                next() {
+                    const result = {
+                        value: arr[i],
+                        done: i >= arr.length
+                    }
+                    i++
+                    return result
+                }
+            }
+        }
+        let iterator1 = createIterator(arr1)
+        let iterator2 = createIterator(arr2)
+    </script>
+</body>
+
+</html>

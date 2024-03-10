@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 迭代数组
+        // 什么是迭代器?
+        // 迭代器是一个对象，拥有next方法，next方法返回一个对象为{value: xxx, done: ccc}
+        const arr = [1,2,3,4,5]
+
+        const iterator = {
+            i: 0, // 当前项
+            next() {
+                const result = {
+                    value: arr[this.i],
+                    done: this.i >= arr.length
+                }
+                this.i++
+                return result
+            }
+        }
+        // console.log(iterator.next());
+        // 让迭代器不断的取出下一个数据，知道没有数据为止
+        let data = iterator.next()
+        while(!data.done) {
+            console.log(data.value);
+            data = iterator.next()
+        }
+        console.log('迭代完成');
+    </script>
+</body>
+</html>

@@ -11,16 +11,12 @@
 <body>
 
   <script>
-    var year = 2022
-    var time = (function () {
-      (function () {
-        year = 2023
-      })()
-      return (function () {
-        console.log(year);
-      })
-    })()
-    time()
+    let str = '<div>dadiv1a</div>'
+
+    let res = str.replace(/div(?=(\d|[a,z]))/g, (a,b) => {
+      return '哈哈'
+    });
+    console.log(res);
   </script>
 </body>
 

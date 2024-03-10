@@ -17,7 +17,11 @@
     <script>
         const div = document.querySelector('div');
         let reg = /<span>([\s\S]+?)<\/span>/ig;
-            div.innerHTML = div.innerHTML.replace(reg, (v, p1) => {
+            div.innerHTML = div.innerHTML.replace(reg, (v, p1,a,b) => {
+                console.log(v);
+                console.log(p1);
+                console.log(a);
+                console.log(b);
             return `<h4>${p1}</h4>`;
         })
     </script>

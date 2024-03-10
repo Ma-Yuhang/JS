@@ -11,37 +11,43 @@
 <body>
     <script>
         // 声明一个对象
-        const banji = {
-            name: '终极一班',
-            stus: [
-                '1',
-                '2',
-                '3',
-                '4'
-            ],
+        // 什么是可迭代协议？
+        // ES6规定，如果一个对象拥有知名属性符号Symbol.iterator,并且属性值是一个迭代器创建函数，
+        // 则该对象是可迭代的(iterable)
+        const obj = {
+            name: '马宇航',
+            age: 22,
+            sex: '男',
             [Symbol.iterator]() {
-                let index = 0;
-                let _this = this;
+                let i = 0;
+                let keys = Object.keys(this) // 得到obj对象属性值组成的数组
                 return {
-                    next: function () {
-                        if (index < _this.stus.length) {
-                            let result = { value: _this.stus[index], done: false };
-                            index++;
-                            return result;
-                        } else {
-                            return {value: undefined, done: true};
+                    next: () => {
+                        let propsName = keys[i]
+                        let propsValue = this[keys[i]]
+                        let result = {
+                            value: { propsName, propsValue },
+                            done: i >= keys.length
                         }
+                        i++
+                        return result
                     }
                 }
             }
         }
+        // 这段代码相当于for of 循环
+        // const iterator = obj[Symbol.iterator]()
+        // let data = iterator.next()
+        // while(!data.done) {
+        //     let item = data.value
+        //     console.log(item);
+        //     data = iterator.next()
+        // }
 
-        for (let v of banji) {
-            console.log(v);
-        }
-        // banji.stus.forEach(function(value) {
-        //     console.log(value);
-        // })
+
+        // for (let v of obj) {
+        //     console.log(v);
+        // }
     </script>
 </body>
 

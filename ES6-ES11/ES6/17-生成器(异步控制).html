@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // http://yuanjin.tech:5005/api/movie
+    function* task() {
+      let d = yield 1
+      console.log(d);
+      let abc = yield 'abc'
+      console.log(abc);
+      let response = yield fetch('http://yuanjin.tech:5005/api/movie')
+      let res = yield response.json()
+      console.log(response);
+      console.log(res);
+    }
+    run(task)
+
+    function run(generatorFunc) {
+      const generator = generatorFunc()
+      let result = generator.next() // 任务开启
+      handleResult()
+
+      function handleResult() {
+        if(result.done) {
+          return
+        }
+        // 没迭代完成分两种数据
+        if(typeof result.value.then === 'function') {
+          // 1.是一个Promise
+          result.value.then(data => {
+            result = generator.next(data)
+            handleResult()
+          },err => {
+            result = generator.throw(err)
+            handleResult()
+          })
+        }else {
+          // 2.是其他数据
+          result = generator.next(result.value)
+          handleResult()
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

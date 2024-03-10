@@ -19,13 +19,13 @@
         function getOrders() {
             setTimeout(() => {
                 let data = ('订单数据');
-                iterator.next(data);  // 第三个next里面的参数将作为第一个yield的返回值
+                iterator.next(data);  // 第三个next里面的参数将作为第二个yield的返回值
             }, 1000);
         }
         function getGoods() {
             setTimeout(() => {
                 let data = ('商品数据');
-                iterator.next(data);  // 第四个next里面的参数将作为第一个yield的返回值
+                iterator.next(data);  // 第四个next里面的参数将作为第三个yield的返回值
             }, 1000);
         }
 
@@ -38,7 +38,7 @@
             console.log(goods);
         }
         let iterator = gen();
-        iterator.next();  // 第一次调用
+        console.log(iterator.next(),'第一次调用');;  // 第一次调用
     </script>
 </body>
 </html>
