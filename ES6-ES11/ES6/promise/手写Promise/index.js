@@ -1,97 +1,334 @@
-const initResolve = require('./Promise.resolve')
-const initReject = require('./Promise.reject')
-const initAll = require('./Promise.all')
-const initRace = require('./Promise.race')
-const initAny = require('./Promise.any')
-const initAllSettled = require('./Promise.allSettled')
-class myPromise {
-  constructor(executor) {
-    this.status = 'pending' // 状态
-    this.value = null // 成功的值
-    this.reason = null // 失败的原因
-    this.onFulfilledCallbacks = []  // 存储成功的回调
-    this.onRejectedCallbacks = []  // 存储失败的回调
+const PENDING = 'pending';
+const FULFILLED = 'fulfilled';
+const REJECTED = 'rejected';
 
-    const resolve = (value) => {
-      if (this.status === 'pending') { // 状态只能改变一次
-        this.status = 'fulfilled' // 执行resolve 状态变为成功
-        this.value = value  // 保存值
-        queueMicrotask(() => {
-          this.onFulfilledCallbacks.forEach(cb => cb())
-        })
-      }
-    }
-    const reject = (reason) => {
-      if (this.status === 'pending') {
-        this.status = 'rejected'
-        this.reason = reason
-
-        queueMicrotask(() => {
-          this.onRejectedCallbacks.forEach(cb => cb())
-        })
-      }
-    }
-
-    executor(resolve, reject)
-  }
-
-  then(onFulfilled, onRejected) {
-    return new myPromise((resolve, reject) => {  // 只要调用then 必定返回一个Promise实例(链式调用)
-      onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : function () { }
-      onRejected = typeof onRejected === 'function' ? onRejected : function () { }
-      if (this.status === 'pending') {
-        this.onFulfilledCallbacks.push(() => {
-          // 判断onFulfilled这个函数是不是又返回了一个promise
-          // 如果返回了promise，则返回的promise的状态就是onFulfilled这个函数的状态
-          // 如果没有返回promise，则状态为成功 成功的值就是返回的值
-          let x = onFulfilled(this.value)
-          x instanceof myPromise ? x.then(resolve, reject) : resolve(x)
-        })
-        this.onRejectedCallbacks.push(() => {
-          // 同理
-          let x = onRejected(this.reason)
-          x instanceof myPromise ? x.then(resolve, reject) : resolve(x)
-        })
-      } else if (this.status === 'fulfilled') {
-        queueMicrotask(() => {
-          let x = onFulfilled(this.value)
-          x instanceof myPromise ? x.then(resolve, reject) : resolve(x)
-        })
-      } else if (this.status === 'rejected') {
-        queueMicrotask(() => {
-          let x = onRejected(this.reason)
-          x instanceof myPromise ? x.then(resolve, reject) : resolve(x)
-        })
-      }
-    })
-  }
-  catch(fn) {
-    return this.then(null, fn)
+/**
+ * 运行一个微队列任务
+ * 把传递的函数放到微队列中
+ * @param {Function} callback
+ */
+function runMicroTask(callback) {
+  // 判断node环境
+  // 为了避免「变量未定义」的错误，这里最好加上前缀globalThis
+  // globalThis是一个关键字，指代全局对象，浏览器环境为window，node环境为global
+  if (globalThis.process && globalThis.process.nextTick) {
+    process.nextTick(callback);
+  } else if (globalThis.MutationObserver) {
+    const p = document.createElement('p');
+    const observer = new MutationObserver(callback);
+    observer.observe(p, {
+      childList: true, // 观察该元素内部的变化
+    });
+    p.innerHTML = '1';
+  } else {
+    setTimeout(callback, 0);
   }
 }
-initResolve(myPromise)
-initReject(myPromise)
-initAll(myPromise)
-initRace(myPromise)
-initAny(myPromise)
-initAllSettled(myPromise)
 
-const p1 = new myPromise((resolve, reject) => {
-  setTimeout(() => {
-    reject(1)
-  }, 300);
-})
-const p2 = new myPromise((resolve, reject) => {
-  setTimeout(() => {
-    reject(2)
-  }, 200);
-})
-const p3 = new myPromise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(3)
-  }, 100);
-})
+/**
+ * 判断一个数据是否是Promise对象
+ * @param {any} obj
+ * @returns
+ */
+function isPromise(obj) {
+  return !!(obj && typeof obj === 'object' && typeof obj.then === 'function');
+}
 
-myPromise.allSettled([p1, p2, p3]).then((data) => {
+class MyPromise {
+  /**
+   * 创建一个Promise
+   * @param {Function} executor 任务执行器，立即执行
+   */
+  constructor(executor) {
+    this._state = PENDING; // 状态
+    this._value = undefined; // 数据
+    this._handlers = []; // 处理函数形成的队列
+    try {
+      executor(this._resolve.bind(this), this._reject.bind(this));
+    } catch (error) {
+      this._reject(error);
+      console.error(error);
+    }
+  }
+
+  /**
+   * 向处理队列中添加一个函数
+   * @param {Function} executor 添加的函数
+   * @param {String} state 该函数什么状态下执行
+   * @param {Function} resolve 让then函数返回的Promise成功
+   * @param {Function} reject 让then函数返回的Promise失败
+   */
+  _pushHandler(executor, state, resolve, reject) {
+    this._handlers.push({
+      executor,
+      state,
+      resolve,
+      reject,
+    });
+  }
+
+  /**
+   * 根据实际情况，执行队列
+   */
+  _runHandlers() {
+    if (this._state === PENDING) {
+      // 目前任务仍在挂起
+      return;
+    }
+    while (this._handlers[0]) {
+      const handler = this._handlers[0];
+      this._runOneHandler(handler);
+      this._handlers.shift();
+    }
+  }
+
+  /**
+   * 处理一个handler
+   * @param {Object} handler
+   */
+  _runOneHandler({ executor, state, resolve, reject }) {
+    runMicroTask(() => {
+      if (this._state !== state) {
+        // 状态不一致，不处理
+        return;
+      }
+
+      if (typeof executor !== 'function') {
+        // 传递后续处理并非一个函数
+        this._state === FULFILLED ? resolve(this._value) : reject(this._value);
+        return;
+      }
+      try {
+        const result = executor(this._value);
+        if (isPromise(result)) {
+          result.then(resolve, reject);
+        } else {
+          resolve(result);
+        }
+      } catch (error) {
+        reject(error);
+        console.error(error);
+      }
+    });
+  }
+
+  /**
+   * Promise A+规范的then
+   * @param {Function} onFulfilled
+   * @param {Function} onRejected
+   */
+  then(onFulfilled, onRejected) {
+    return new MyPromise((resolve, reject) => {
+      this._pushHandler(onFulfilled, FULFILLED, resolve, reject);
+      this._pushHandler(onRejected, REJECTED, resolve, reject);
+      this._runHandlers(); // 执行队列
+    });
+  }
+
+  /**
+   * 仅处理失败的场景
+   * @param {Function} onRejected
+   */
+  catch(onRejected) {
+    return this.then(null, onRejected);
+  }
+
+  /**
+   * 无论成功还是失败都会执行回调
+   * @param {Function} onSettled
+   */
+  finally(onSettled) {
+    return this.then((data) => {
+      onSettled();
+      return data;
+    }, (reason) => {
+      onSettled();
+      throw reason;
+    }
+    );
+  }
+
+  /**
+   * 更改任务状态
+   * @param {String} newState 新状态
+   * @param {any} value 相关数据
+   */
+  _changeState(newState, value) {
+    if (this._state !== PENDING) {
+      // 目前状态已经更改
+      return;
+    }
+    // 下面这个判断是为了处理value为Promise的情况
+    // 这一段代码课程中没有涉及，特此注释说明
+    if (isPromise(value)) {
+      value.then(this._resolve.bind(this), this._reject.bind(this));
+      return;
+    }
+    this._state = newState;
+    this._value = value;
+    this._runHandlers(); // 状态变化，执行队列
+  }
+
+  /**
+   * 标记当前任务完成
+   * @param {any} data 任务完成的相关数据
+   */
+  _resolve(data) {
+    this._changeState(FULFILLED, data);
+  }
+
+  /**
+   * 标记当前任务失败
+   * @param {any} reason 任务失败的相关数据
+   */
+  _reject(reason) {
+    this._changeState(REJECTED, reason);
+  }
+
+  /**
+   * 返回一个已完成的Promise
+   * 特殊情况：
+   * 1. 传递的data本身就是ES6的Promise对象
+   * 2. 传递的data是PromiseLike（Promise A+），返回新的Promise，状态和其保持一致即可
+   * @param {any} data
+   */
+  static resolve(data) {
+    if (data instanceof MyPromise) {
+      return data;
+    }
+    return new MyPromise((resolve, reject) => {
+      if (isPromise(data)) {
+        data.then(resolve, reject);
+      } else {
+        resolve(data);
+      }
+    });
+  }
+
+  /**
+   * 得到一个被拒绝的Promise
+   * @param {any}} reason
+   */
+  static reject(reason) {
+    return new MyPromise((resolve, reject) => {
+      reject(reason);
+    });
+  }
+
+  /**
+   * 得到一个新的Promise
+   * 该Promise的状态取决于proms的执行
+   * proms是一个迭代器，包含多个Promise
+   * 全部Promise成功，则返回的Promise成功，数据为所有Promise成功的数据，并且顺序是按照传入的顺序排列
+   * 只要有一个Promise失败，则返回的Promise失败，原因是第一个失败的Promise的原因
+   * @param {iterator} proms
+   */
+  static all(proms) {
+    return new MyPromise((resolve, reject) => {
+      try {
+        const results = [];
+        let count = 0; // Promise的总数
+        let fulfilledCount = 0; // 已完成的数量
+        for (const p of proms) {
+          let i = count;
+          count++;
+          MyPromise.resolve(p).then((data) => {
+            fulfilledCount++;
+            results[i] = data;
+            if (fulfilledCount === count) {
+              // 当前是最后一个Promise完成了
+              resolve(results);
+            }
+          }, reject);
+        }
+        if (count === 0) {
+          resolve(results);
+        }
+      } catch (error) {
+        reject(error);
+        console.error(error);
+      }
+    });
+  }
+
+  /**
+   * 等待所有的Promise有结果之后
+   * 该方法返回的Promise完成
+   * 并且按照顺序将所有结果汇总
+   * @param {iterator} proms
+   */
+  static allSettled(proms) {
+    const ps = [];
+    for (const p of proms) {
+      ps.push(
+        MyPromise.resolve(p).then(
+          (value) => ({
+            status: FULFILLED,
+            value,
+          }),
+          (reason) => ({
+            status: REJECTED,
+            reason,
+          })
+        )
+      );
+    }
+    return MyPromise.all(ps);
+  }
+  // static allSettled(proms) {
+  //   return new MyPromise((resolve) => {
+  //     const results = [];
+  //     let count = 0 // prom的总数
+  //     let settledCount = 0 // 已决的总数
+  //     for (const p of proms) {
+  //       let i = count
+  //       count++
+  //       MyPromise.resolve(p).then((data) => {
+  //         results[i] = {
+  //           status: FULFILLED,
+  //           value: data,
+  //         }
+  //       }, (reason) => {
+  //         results[i] = {
+  //           status: REJECTED,
+  //           reason,
+  //         }
+  //       }).finally(() => {
+  //         settledCount++
+  //         if (settledCount === count) {
+  //           resolve(results)
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
+
+  /**
+   * 返回的Promise与第一个有结果的一致
+   * @param {iterator} proms
+   */
+  static race(proms) {
+    return new MyPromise((resolve, reject) => {
+      for (const p of proms) {
+        MyPromise.resolve(p).then(resolve, reject);
+      }
+    });
+  }
+}
+
+
+const pro1 = new MyPromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(1)
+  }, 1000);
+})
+const p1 = MyPromise.allSettled([
+  pro1,
+  MyPromise.reject(2),
+  MyPromise.resolve(3),
+  4
+]).then((data) => {
   console.log(data);
+}, (err) => {
+  console.log(err);
 })
