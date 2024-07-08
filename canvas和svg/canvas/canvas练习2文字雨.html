@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      canvas {
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #222;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas></canvas>
+    <script>
+      // 生成随机数[min, max]
+      function getRandom(min, max) {
+        return Math.floor(Math.random() * (max + 1 - min) + min)
+      }
+      // 生成一个随机字符
+      function getChar() {
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789'
+        return chars[Math.floor(Math.random() * chars.length)]
+      }
+      const cvs = document.querySelector('canvas')
+      const ctx = cvs.getContext('2d')
+
+      function init() {
+        // 原图尺寸 = 样式尺寸 * 缩放倍率
+        cvs.width = innerWidth * devicePixelRatio
+        cvs.height = innerHeight * devicePixelRatio
+      }
+      init()
+
+      const fontSize = 10 * devicePixelRatio // 列宽
+      const columnCount = Math.floor(cvs.width / fontSize) // 列数
+      const charArr = new Array(columnCount).fill(0)
+      ctx.textBaseline = 'top'
+      ctx.font = `${fontSize}px "Roboto Mono"`
+      function draw() {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
+        ctx.fillRect(0, 0, cvs.width, cvs.height)
+
+        for (let i = 0; i < charArr.length; i++) {
+          ctx.fillStyle = `rgb(${getRandom(0, 255)}, ${getRandom(
+            0,
+            255
+          )}, ${getRandom(0, 255)})`
+          const x = i * fontSize
+          const y = charArr[i] * fontSize
+          ctx.fillText(getChar(), x, y)
+          if (charArr[i] * fontSize > cvs.height && Math.random() > 0.99) {
+            charArr[i] = 0
+          } else {
+            charArr[i]++
+          }
+        }
+      }
+      draw()
+      setInterval(() => {
+        draw()
+      }, 50)
+    </script>
+  </body>
+</html>
